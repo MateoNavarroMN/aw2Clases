@@ -1,0 +1,21 @@
+{
+  "name": "desarrollo-aw2",
+  "version": "1.0.0",
+  "description": "Este de practica aw2",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MateoNavarroMN/ProbandoHola.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/MateoNavarroMN/ProbandoHola/issues"
+  },
+  "homepage": "https://github.com/MateoNavarroMN/ProbandoHola#readme"
+}
