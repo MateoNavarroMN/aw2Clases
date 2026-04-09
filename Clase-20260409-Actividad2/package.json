@@ -1,12 +1,10 @@
 {
-  "name": "clase-20260408",
+  "name": "clase-20260409-actividad2",
   "version": "1.0.0",
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "dev": "node index.mjs",
-    "leerApi": "node leerApi.mjs",
-    "escribirApi": "node escribirApi.mjs"
+    "dev": "node index.mjs"
   },
   "keywords": [],
   "author": "",
