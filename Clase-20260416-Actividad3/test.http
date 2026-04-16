@@ -5,5 +5,15 @@ GET https://api.escuelajs.co/api/v1/users
 
 ### ----
 
-# GET - localhost:3000 
+# GET - raiz o cualquier ruta 
+GET http://localhost:3000
+
+### ----
+
+# GET - /usuarios
 GET http://localhost:3000/usuarios
+
+### ----
+
+# GET - /usuarios/filtrados
+GET http://localhost:3000/usuarios/filtrados
