@@ -1,0 +1,9 @@
+### ----
+
+# GET - REST API
+GET https://api.escuelajs.co/api/v1/users
+
+### ----
+
+# GET - localhost:3000 
+GET http://localhost:3000/usuarios
