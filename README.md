@@ -42,3 +42,5 @@ Si ya lo bajaron, siempre verifiquen si están actualizadxs:
 * npm install un-paquete otro-paquete -> instalar uno o mas paquetes
 * Configurar comando dentro de "scripts" -> por ejemplo "dev":"node index.js"
 * npm run dev -> correr comando dev. Equivale a node index.js en consola.
+* npm i -E express -> Instala express
+* npm i -> para instalar las dependencias del proyecto 
