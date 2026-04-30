@@ -1,0 +1,16 @@
+{
+  "name": "actividad4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:api": "cd api && node --watch index.mjs",
+    "dev:proy": "cd proyecto && node --watch index.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "5.2.1"
+  }
+}
