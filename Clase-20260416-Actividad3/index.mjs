@@ -10,14 +10,14 @@ const app = http.createServer(async (peticion, respuesta) => {
 
         // RUTA 1: /usuarios
         if (peticion.url === '/usuarios') {
-            
+
             try {
                 // Estado de peticion
                 respuesta.statusCode = 200
 
                 // Fetch a API externa
                 const datosApi = await obtenerUsuariosApi()
-                
+
                 // Escribir datos en un .json
                 const ruta = path.join('./usuarios.json')
                 await guardarArchivoJSON(ruta, datosApi)

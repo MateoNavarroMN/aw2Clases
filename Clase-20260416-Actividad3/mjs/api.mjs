@@ -5,6 +5,6 @@ export async function obtenerUsuariosApi() {
         const datosApi = await respuestaApi.json()
         return datosApi
     } catch (error) {
-        console.error("Error al conectar con la API:", error);
+        console.error("Error al conectar con la API:", error)
     }
 }

@@ -6,7 +6,7 @@ export async function guardarArchivoJSON(ruta, datos) {
         const contenido = JSON.stringify(datos, null, 8)
         await fps.writeFile(ruta, contenido)
     } catch (error) {
-        console.error("Error al conectar con la API:", error);
+        console.error("Error al conectar con la API:", error)
     }
 }
 
@@ -16,6 +16,6 @@ export async function leerArchivoJSON(ruta) {
         const datosLeidos = await fps.readFile(ruta)
         return JSON.parse(datosLeidos)
     } catch (error) {
-        console.error("Error al conectar con la API:", error);
+        console.error("Error al conectar con la API:", error)
     }
 }
