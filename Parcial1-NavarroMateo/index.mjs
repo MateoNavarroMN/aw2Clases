@@ -13,18 +13,18 @@ app.use(express.json())
 app.get('/', (req, res) => {
     res.json({
         mensaje: 'endpoints disponibles',
-        guitarras: '/guitarras',
-        guitarraId: '/guitarras/:id (id: 1 al 15)',
+        guitarras: '/api/v1/guitarras',
+        guitarraId: '/api/v1/guitarras/:id (id: 1 al 15)',
         proceso: '/calcular-precio-total/:tipo (tipo: Electrica, Acustica, Electroacustica)'
     })
 })
 
 // 1- REST
 // Exponen los recursos siguiendo los principios de la arquitectura REST
-app.get('/guitarras', obtenerGuitarras)
+app.get('/api/v1/guitarras', obtenerGuitarras)
 
 // Se inyecta el middleware propio antes del controlador para validar el parametro
-app.get('/guitarras/:id', validarIdNumerico, obtenerGuitarraId)
+app.get('/api/v1/guitarras/:id', validarIdNumerico, obtenerGuitarraId)
 
 // 2- Ruta procedural, no REST
 // Endpoint orientado a procesos, diseñado por fuera de las convenciones estrictas de REST
@@ -40,6 +40,6 @@ app.use((req, res) => {
 
 app.listen(PUERTO, () => {
     console.log(`Servidor de [Parcial 1] corriendo en http://localhost:${PUERTO}`)
-    console.log(`Servidor de [Parcial 1] corriendo en http://localhost:${PUERTO}/guitarras`)
+    console.log(`Servidor de [Parcial 1] corriendo en http://localhost:${PUERTO}/api/v1/guitarras`)
     console.log(`Servidor de [Parcial 1] corriendo en http://localhost:${PUERTO}/calcular-precio-total/electrica`)
 })
