@@ -1,5 +1,4 @@
-import productos from "../../productos.mjs";
-
+import productos from "../../productos.mjs"
 
 export function obtenerTodos(){
     // Haria una consulta a una bd
