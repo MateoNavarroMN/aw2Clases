@@ -10,14 +10,14 @@ export async function obtenerProductos(req, res){
     res.json(productos)
 }
 
-export async function crearProducto(){
+export async function crearProducto(req, res){
     const datosProducto = req.body
     // Futuro esto va en la capa servicios <--- logica negocios
     // verificar datos que ingresan del cliente:
     // - Si es un numero/cadena, si no esta vacio, etc.
     const producto = await modelo.crearProducto(datosProducto)
 
-    if(producto.lenght === 0){
+    if(producto.length === 0){
         res.status(400).json({ mensaje: 'No se pudo dar de alta el registro' })
     }
 

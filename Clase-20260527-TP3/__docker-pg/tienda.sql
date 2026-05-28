@@ -215,3 +215,9 @@ INSERT INTO variantes (producto_id, talle_id, color_id, stock) VALUES
 (9, 4, 7, 15),
 -- Remera Guardapampa (Solo XL)
 (10, 4, 4, 15);
+
+-- 7. Ajuste de seguridad PostgreSQL (Para que los IDs automáticos sigan desde el 11)
+SELECT setval('categorias_id_seq', (SELECT MAX(id) FROM categorias));
+SELECT setval('talles_id_seq', (SELECT MAX(id) FROM talles));
+SELECT setval('colores_id_seq', (SELECT MAX(id) FROM colores));
+SELECT setval('productos_id_seq', (SELECT MAX(id) FROM productos));
