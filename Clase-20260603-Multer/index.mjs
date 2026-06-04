@@ -1,9 +1,7 @@
 import express from 'express'
 import multer from 'multer'
 import { nanoid } from 'nanoid'
-import { MimeType } from 'mime-types'
-
-const mime = MimeType()
+import mime from 'mime-types'
 
 const PUERTO = 3000
 
@@ -20,7 +18,7 @@ const almacenamiento = multer.diskStorage({
   // Gestion del nombre
   filename: function (req, file, cb) {
     // Obtengo la extension desde el mime type
-    const extension = mime.extension(file.mimetypes)
+    const extension = mime.extension(file.mimetype)
     // Creo el nombre del archivo con un identificador unico con nanoid()
     const nombreImagen = nanoid() + '.' + extension // Genera un UID
     cb(null, nombreImagen)
