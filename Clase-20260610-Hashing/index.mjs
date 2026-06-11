@@ -24,6 +24,34 @@ app.use('/login', express.static('./fronts/front-login'))
 app.post('/autenticacion', (req, res)   =>{
     // Actividad 5
     // Generar el id con nanoid
+
+    const { usuario, pass } = req.body
+
+    const resultado = await pool.query(`
+                    SELECT * 
+                    FROM usuarios
+                    WHERE usuario = $1 AND password_hash = $2
+                    RETURNING
+                        (id, username, password_hash)
+                    `,
+        [usuario, pass]
+    )
+
+    const comparar = await bcrypt.compare(pass, resultado['password_hash'])
+
+    if(!comparar){
+        res.redirect('/login')
+    }
+
+    res.cookie('sesionId', 'minumerodesesion', {  // minumerodesesion se puede generar con nanoid
+        signed: true, // Cookies firmadas
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: true, // Solo se mandan si es https
+        maxAge: 1000 * 10
+    })
+
+    res.redirect('/admin')
 })
 
 
@@ -74,3 +102,16 @@ app.post('/registrar', async (req, res) => {
 app.listen(PUERTO, () => {
     console.log(`Servidor escuchando en el puerto http://localhost:${PUERTO}`);
 });
+
+// Middleware para bloquer acceso
+function chequearCookie(req, res, next){
+    // verifico si la cookie existe
+    const sesionId = req.signedCookies['sesionId']
+
+    // Verifico si el valor enviado por el cliente coincide con lo que tenemos en el servidor
+    if(sesionId === 'minumerodesesion'){
+        return next()
+    }
+
+    return res.redirect('/login')
+}
