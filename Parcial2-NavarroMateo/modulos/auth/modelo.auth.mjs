@@ -56,7 +56,7 @@ export async function eliminarSessionId(sessionId) {
         const resultado = await pool.query(`
                 UPDATE usuarios
                 SET session_id = NULL
-                WHERE id = $1
+                WHERE session_id = $1
             `,
             [sessionId]
         )
