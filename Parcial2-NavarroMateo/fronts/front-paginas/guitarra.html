@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle - Guitarra</title>
+    <style>
+        body {
+            background: #f5f6fa;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        nav {
+            background: #3498db;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 500px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .card-detail {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
+
+        .card-detail h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 0.5rem;
+        }
+
+        .card-detail p {
+            font-size: 1.1rem;
+            margin: 0.8rem 0;
+        }
+
+        .btn-back {
+            display: inline-block;
+            background: #95a5a6;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+            transition: background 0.2s;
+        }
+
+        .btn-back:hover {
+            background: #7f8c8d;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="./index.html">Guitarras</a>
+        <a href="./procedimiento.html">Procedimiento</a>
+        <a href="/cerrar-sesion">Cerrar Sesión</a>
+    </nav>
+
+    <main>
+        <div class="card-detail" id="detalleGuitarra">
+            <h2 id="titulo">Cargando...</h2>
+            <div id="info"></div>
+            <a href="./index.html" class="btn-back">← Volver al inventario</a>
+        </div>
+    </main>
+
+    <script>
+        async function cargarItem() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            if (!id) {
+                document.getElementById('titulo').innerText = "Error: ID no proporcionado";
+                return;
+            }
+
+            try {
+                const res = await fetch(`/api/v1/guitarras/${id}`);
+                if (!res.ok) return window.location.href = '/login';
+
+                const dataRaw = await res.json();
+
+                const data = Array.isArray(dataRaw) ? dataRaw[0] : dataRaw;
+
+                if (!data) {
+                    throw new Error("El servidor devolvió datos vacíos.");
+                }
+
+                document.getElementById('titulo').innerText = `${data.marca} ${data.modelo}`;
+                document.getElementById('info').innerHTML = `
+                <p><strong>ID de Sistema:</strong> ${data.id}</p>
+                <p><strong>Marca:</strong> ${data.marca}</p>
+                <p><strong>Tipo:</strong> ${data.tipo}</p>
+                <p><strong>Año de Fabricación:</strong> ${data.año}</p>
+                <p><strong>Precio:</strong> $${data.precio.toLocaleString()} USD</p>
+            `;
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById('titulo').innerText = "Error al cargar la guitarra";
+                document.getElementById('info').innerHTML = `<p style="color:red;">Revisa la consola para más detalles.</p>`;
+            }
+        }
+
+        cargarItem();
+    </script>
+</body>
+
+</html>

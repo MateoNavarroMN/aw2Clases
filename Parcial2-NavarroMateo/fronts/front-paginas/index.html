@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario - Guitarras</title>
+    <style>
+        body {
+            background: #f5f6fa;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        nav {
+            background: #3498db;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #ecf0f1;
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn-link {
+            background: #3498db;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .btn-link:hover {
+            background: #217dbb;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="./index.html">Guitarras</a>
+        <a href="./procedimiento.html">Procedimiento</a>
+        <a href="/cerrar-sesion">Cerrar Sesión</a>
+    </nav>
+
+    <main>
+        <h2>Inventario de Guitarras</h2>
+        <div id="contenedorGuitarras">
+            <p>Cargando información...</p>
+        </div>
+    </main>
+
+    <script>
+        async function cargarItems() {
+            try {
+                const res = await fetch('/api/v1/guitarras');
+
+                if (!res.ok) return window.location.href = '/login';
+
+                const data = await res.json();
+                const contenedor = document.getElementById('contenedorGuitarras');
+                contenedor.innerHTML = '';
+
+                data.forEach(guitarra => {
+                    const div = document.createElement('div');
+                    div.className = 'card';
+                    div.innerHTML = `
+                        <div>
+                            <strong>${guitarra.marca} ${guitarra.modelo}</strong>
+                            <div style="font-size: 0.85rem; color: #7f8c8d; margin-top: 0.3rem;">
+                                Tipo: ${guitarra.tipo}
+                            </div>
+                        </div>
+                        <a href="./guitarra.html?id=${guitarra.id}" class="btn-link">Ver guitarra</a>
+                    `;
+                    contenedor.appendChild(div);
+                });
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById('contenedorGuitarras').innerHTML = '<p style="color:red;">Error al cargar los datos.</p>';
+            }
+        }
+
+        cargarItems();
+    </script>
+</body>
+
+</html>
