@@ -6,7 +6,7 @@ import './iniciar.env.mjs'
 import rutasGuitarras from './modulos/guitarras/rutas.guitarras.mjs'
 import rutasProcesos from './modulos/procesos/rutas.procesos.mjs'
 import rutasLogin from './modulos/auth/rutas.auth.mjs'
-import * as controladorMiddleware from './modulos/middlewares/controlador.middlewares.mjs'
+import * as middleware from './modulos/middlewares/controlador.middlewares.mjs'
 
 const PUERTO = process.env.PUERTO || 3000
 
@@ -23,11 +23,11 @@ app.use('/login', express.static('./fronts/front-login'))
 // Endpoints Login y Cerrar Sesion
 app.use(rutasLogin)
 
-app.use('/', controladorMiddleware.comprobarToken, express.static('./fronts/front-paginas'))
+app.use('/', middleware.comprobarToken, express.static('./fronts/front-paginas'))
 
 // Endpoints REST y Procedimiento
-app.use(controladorMiddleware.comprobarToken, rutasGuitarras)
-app.use(controladorMiddleware.comprobarToken, rutasProcesos)
+app.use(middleware.comprobarToken, rutasGuitarras)
+app.use(middleware.comprobarToken, rutasProcesos)
 
 
 // Manejo de errores (Fallback)
@@ -42,6 +42,6 @@ app.use((req, res) => {
 
 app.listen(PUERTO, () => {
     console.log(`Guitarras: http://localhost:${PUERTO}`)
-    console.log(`Guitarras ID: http://localhost:${PUERTO}/guitarra.html?id=1`)
+    console.log(`Guitarra ID: http://localhost:${PUERTO}/guitarra.html?id=1`)
     console.log(`Procedimiento: http://localhost:${PUERTO}/procedimiento.html`)
 })
