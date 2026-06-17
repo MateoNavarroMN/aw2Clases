@@ -36,12 +36,12 @@ app.use((req, res) => {
     res.status(404).json({
         mensaje: "Recurso no encontrado",
         ruta: req.originalUrl,
-        raiz: `http://localhost:${PUERTO}/api/v1/guitarras/`
+        raiz: `http://localhost:${PUERTO}`
     })
 })
 
 app.listen(PUERTO, () => {
     console.log(`Guitarras: http://localhost:${PUERTO}`)
-    console.log(`Guitarra ID: http://localhost:${PUERTO}/guitarra.html?id=1`)
+    console.log(`Guitarra ID 1: http://localhost:${PUERTO}/guitarra.html?id=1`)
     console.log(`Procedimiento: http://localhost:${PUERTO}/procedimiento.html`)
 })
